@@ -6,48 +6,45 @@ from page.base_page import BasePage
 class OrderPage(BasePage):
 
     def set_name(self, name):
-        self.driver.find_element(*locator.input_name).send_keys(name)
+        self.set_value(locator.input_name, name)
 
     def set_surname(self, surname):
-        self.driver.find_element(*locator.input_surname).send_keys(surname)
+        self.set_value(locator.input_surname, surname)
 
     def set_address(self, address):
-        self.driver.find_element(*locator.input_address).send_keys(address)
+        self.set_value(locator.input_address, address)
 
     def set_metro(self, metro):
-        element = self.driver.find_element(*locator.input_metro)
-        element.send_keys(metro)
+        self.set_value(locator.input_metro, metro)
         self.wait_visibility_of_element(locator.option_metro_first)
-        self.driver.find_element(*locator.option_metro_first).click()
+        self.click_button(locator.option_metro_first)
 
     def set_phone(self, phone):
-        self.driver.find_element(*locator.input_phone).send_keys(phone)
+        self.set_value(locator.input_phone, phone)
 
     def set_date(self, date):
-        element = self.driver.find_element(*locator.input_date)
-        element.send_keys(date)
-        element.send_keys(Keys.ENTER)
+        self.set_value(locator.input_date, date)
+        self.find_element_on_page(locator.input_date).send_keys(Keys.ENTER)
 
     def set_rent_period(self):
-        element = self.driver.find_element(*locator.dropdown_rent_period)
-        element.click()
+        self.click_button(locator.dropdown_rent_period)
         self.wait_visibility_of_element(locator.option_rent_period)
-        element.find_element(*locator.option_rent_period).click()        
+        self.click_button(locator.option_rent_period)   
 
     def set_color(self, color):
         if color == 'black':
-            self.driver.find_element(*locator.color_black).click()
+            self.click_button(locator.color_black)
         elif color == 'grey':
-            self.driver.find_element(*locator.color_grey).click()
+            self.click_button(locator.color_grey)
 
     def click_order_button(self):
-        self.driver.find_element(*locator.button_order_middle).click()
+        self.click_button(locator.button_order_middle)
 
     def click_yes_button(self):
-        self.driver.find_element(*locator.button_yes).click()
+        self.click_button(locator.button_yes)
 
     def get_order_text(self, locator):
-        return self.driver.find_element(*locator).text
+        return self.get_text(locator)
 
     def order(self, name, surname, address, metro, phone, date, color):
         self.set_name(name)

@@ -11,9 +11,9 @@ def driver():
 @pytest.fixture(scope="function")
 def driver_main_page(driver):
     driver.get(url.URL_MAIN)
-    yield driver
+    return driver
 
 @pytest.fixture(scope="function")
 def driver_order_page(driver):
     driver.get(url.URL_ORDER)
-    yield driver
+    return driver
